@@ -7,6 +7,8 @@ import { ApolloServer } from "apollo-server-express";
 import mongoose from "mongoose";
 import schemaGenerator from "./schemaGenerator";
 
+const port = process.env.PORT || 4000;
+
 async function main() {
   if (process.env.NODE_ENV === "development") {
     mongoose.set("debug", "true");
@@ -22,10 +24,11 @@ async function main() {
     context: ({ req }) => ({ req, UserModel })
   });
   const app = Express();
+  app.get('/', (req,res)=> res.redirect('/graphql'));
 
   apolloServer.applyMiddleware({ app });
 
-  app.listen(4000, () => console.log(`server is ready`));
+  app.listen(port, () => console.log(`server is ready on port:${port}`));
 }
 
 main();
