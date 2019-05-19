@@ -21,10 +21,7 @@ yarn
 5. Install and start Redis
 (https://redis.io/download)
 
-6. Add .env file in the root folder and use your mongodb uri
-```
-MONGODB_URI=mongodb://localhost/auth
-```
+6. Add .env file in the root folder and use your own `MONGODB_URI` var
 
 ## Usage
 
