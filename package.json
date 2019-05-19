@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "ts-node-dev --respawn --no-notify src/index.ts",
-    "build": "rimraf ./dist && tsc && copyfiles -u 1 src/**/*.gql dist",
+    "build": "rimraf ./dist && npx tsc && copyfiles -u 1 src/**/*.gql dist",
     "start": "yarn run build && node dist/index.js"
   },
   "keywords": [],
@@ -28,7 +28,8 @@
     "rimraf": "^2.6.3",
     "type-graphql": "^0.17.3",
     "typegoose": "^5.6.0",
-    "uuid": "^3.3.2"
+    "uuid": "^3.3.2",
+    "typescript": "^3.4.5"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
@@ -39,7 +40,6 @@
     "@types/mongoose": "^5.5.0",
     "@types/node": "^12.0.0",
     "@types/uuid": "^3.4.4",
-    "ts-node-dev": "^1.0.0-pre.37",
-    "typescript": "^3.4.5"
+    "ts-node-dev": "^1.0.0-pre.37"
   }
 }
