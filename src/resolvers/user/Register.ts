@@ -1,6 +1,5 @@
 import { Resolver, Mutation, Field, Arg, InputType, Ctx } from "type-graphql";
 import bcrypt from "bcryptjs";
-import { IsEmail } from "class-validator";
 import { createToken, emailExists } from "../../utils";
 import { AuthPayload } from "./AuthPayload";
 import { MyContext } from "../../types/MyContext";

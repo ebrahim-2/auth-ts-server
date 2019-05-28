@@ -10,6 +10,9 @@ class AuthGoogleInput {
 
   @Field()
   googleId: string;
+
+  @Field()
+  email: string;
 }
 
 @Resolver()
@@ -24,7 +27,8 @@ export default class AuthGoogleResolver {
     if (!user) {
       const newUser = await UserModel.create({
         name: data.name,
-        googleId: data.googleId
+        googleId: data.googleId,
+        email: data.email
       });
       const token = createToken(newUser);
 

@@ -10,6 +10,9 @@ class AuthFacebookInput {
 
   @Field()
   facebookId: string;
+
+  @Field()
+  email: string;
 }
 
 @Resolver()
@@ -24,7 +27,8 @@ export class AuthFacebookResolver {
     if (!user) {
       const newUser = await UserModel.create({
         name: data.name,
-        facebookId: data.facebookId
+        facebookId: data.facebookId,
+        email: data.email
       });
       const token = createToken(newUser);
 
