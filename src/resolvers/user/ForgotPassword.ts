@@ -8,7 +8,7 @@ export default class ForgotPassword {
   @Mutation(returns => String)
   async forgotPassword(
     @Arg("email") email: string,
-    @Ctx() { UserModel }: MyContext
+    @Ctx() { UserModel, req }: MyContext
   ) {
     const user = await UserModel.findOne({ email });
     if (!user) throw new Error("There is no user with this account");

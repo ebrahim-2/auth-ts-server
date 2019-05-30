@@ -12,6 +12,7 @@ input AuthFacebookInput {
 input AuthGoogleInput {
   name: String!
   googleId: String!
+  email: String!
 }
 
 type AuthPayload {

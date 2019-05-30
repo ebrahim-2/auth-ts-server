@@ -41,7 +41,7 @@ export const createResetPasswordUrl = async (userId: number) => {
   await redis.set(token, userId); // 1 day expiration
   await redis.expire(token, 3600)
 
-  return `http://localhost:3000/reset/${token}`;
+  return `${process.env.PROTOCOL}://${process.env.HOST}/reset/${token}`;
 };
 
 export { getUserId, createToken, verifyToken, emailExists };
