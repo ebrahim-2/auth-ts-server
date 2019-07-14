@@ -6,10 +6,16 @@ import Express from "express";
 import { ApolloServer } from "apollo-server-express";
 import mongoose from "mongoose";
 import schemaGenerator from "./schemaGenerator";
+import cors from 'cors';
+
 const app = Express();
 
 const port = process.env.PORT || 4000;
 
+app.use(cors({
+  origin: ['http://localhost:3000','https://ebrahimkreem.github.io'],
+  optionsSuccessStatus: 200
+}))
 async function main() {
   if (process.env.NODE_ENV === "development") {
     mongoose.set("debug", "true");
@@ -31,11 +37,5 @@ async function main() {
 
   app.listen(port, () => console.log(`server is ready on port:${port}`));
 }
-
-setInterval(function() {
-  app.get("http://stormy-atoll-34870.herokuapp.com");
-  app.get("/");
-}, 300000); 
-
 
 main();
