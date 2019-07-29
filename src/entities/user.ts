@@ -22,7 +22,13 @@ export class User extends Typegoose {
   facebookId?: string;
 
   @prop()
-  googleId: string;
+  googleId?: string;
+
+  @prop()
+  resetPasswordToken?: string | null;
+
+  @prop()
+  resetPasswordExpires?: number | null;
 }
 
 export const UserModel = new User().getModelForClass(User);

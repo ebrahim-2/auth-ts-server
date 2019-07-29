@@ -6,23 +6,25 @@ import Express from "express";
 import { ApolloServer } from "apollo-server-express";
 import mongoose from "mongoose";
 import schemaGenerator from "./schemaGenerator";
-import cors from 'cors';
+import cors from "cors";
 
 const app = Express();
 
 const port = process.env.PORT || 4000;
 
-app.use(cors({
-  origin: ['http://localhost:3000','https://ebrahimkreem.github.io'],
-  optionsSuccessStatus: 200
-}))
+app.use(
+  cors({
+    origin: ["http://localhost:3000", "https://ebrahimkreem.github.io"],
+    optionsSuccessStatus: 200
+  })
+);
 async function main() {
   if (process.env.NODE_ENV === "development") {
     mongoose.set("debug", "true");
   }
   mongoose.Promise = global.Promise;
   mongoose.set("useCreateIndex", true);
-  mongoose.connect(process.env.MONGODB_URI, {
+  mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/auth", {
     useNewUrlParser: true
   });
 
@@ -30,8 +32,8 @@ async function main() {
     schema: await schemaGenerator(),
     context: ({ req }) => ({ req, UserModel })
   });
-  
-  app.get('/', (req,res)=> res.redirect('/graphql'));
+
+  app.get("/", (req, res) => res.redirect("/graphql"));
 
   apolloServer.applyMiddleware({ app });
 

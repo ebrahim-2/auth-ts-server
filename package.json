@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "@sendgrid/mail": "^6.4.0",
+    "@types/dotenv": "^6.1.1",
     "apollo-server-express": "^2.5.0",
     "bcryptjs": "^2.4.3",
     "class-validator": "^0.9.1",

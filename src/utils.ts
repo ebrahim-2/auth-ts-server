@@ -1,10 +1,11 @@
-import { v4 } from "uuid";
+import { Request } from 'express';
+import  uuid  from "uuid/v4";
 import jwt from "jsonwebtoken";
-import { UserModel } from "./entities/user";
-import { redis } from "./redis";
+import { User, UserModel } from "./entities/user";
+import { InstanceType } from 'typegoose';
 
 
-const getUserId = req => {
+const getUserId = (req: Request) => {
   const Authorization = req.get("Authorization");
   if (Authorization) {
     const token = Authorization.replace("Bearer ", "");
@@ -20,13 +21,13 @@ const verifyToken = (token: string) => {
   return jwt.verify(token, "this is my secret");
 };
 
-const createToken = user => {
+const createToken = (user: InstanceType<User>) => {
   return jwt.sign(
     {
-      userId: user._id
+      userId: user.id
     },
     "this is my secret"
-  );
+  );0
 };
 
 const emailExists = async (email: string) => {
@@ -37,9 +38,7 @@ const emailExists = async (email: string) => {
 };
 
 export const createResetPasswordUrl = async (userId: number) => {
-  const token = v4();
-  await redis.set(token, userId); // 1 day expiration
-  await redis.expire(token, 3600)
+  const token = uuid();
 
   return `${process.env.PROTOCOL}://${process.env.HOST}/reset/${token}`;
 };
