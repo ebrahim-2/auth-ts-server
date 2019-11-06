@@ -3,7 +3,7 @@ import sgMail from "@sendgrid/mail";
 sgMail.setApiKey(
   process.env.SENDGRID_API_KEY
 );
-export async function sendMail(email, link) {
+export async function sendMail(email: string, link: string) {
   var message = {
     to: email,
     from: "passwordReset@demo.com",
